@@ -1,6 +1,19 @@
 Attribute VB_Name = "vbachallenge"
 Sub vbachallenge()
 
+'This counter is used to create our new ticker table
+Dim j As Long
+
+'These counters are required to calculate total stock volume
+Dim Opening As Double
+Dim Closing As Double
+
+Dim x As Long
+Dim y As Long
+
+'This is used to define the end point of the raw datasheet
+Dim NumRows As Long
+
 'Loop to run through each worksheet in workbook
 Dim ws As Worksheet
 For Each ws In Worksheets
@@ -9,20 +22,9 @@ For Each ws In Worksheets
 ws.Range("J:Q").FormatConditions.Delete
 ws.Range("J:Q").Value = ""
 
-'This is used to define the end point of the raw datasheet
-Dim NumRows As Long
+'Reset of certain variables
 NumRows = 1 + ws.Range("A2", ws.Range("A2").End(xlDown)).Rows.Count
-
-'This counter is used to create our new ticker table
-Dim j As Long
 j = 2
-
-'These counters are required to calculate total stock volume
-Dim Opening As Double
-Dim Closing As Double
-
-Dim x As Long
-Dim y As Long
 
 'Create Required Headers
 ws.Range("J1:M1").Value = Array("Ticker", "Yearly Change", "Percent Change", "Total Stock Volume")
@@ -51,6 +53,7 @@ For Z = x To y
 ws.Cells(j, 13).Value = ws.Cells(j, 13).Value + ws.Cells(Z, 7)
 Next Z
 
+'Increment J to move to next ticker
 j = j + 1
 End If
 
