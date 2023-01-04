@@ -23,7 +23,7 @@ ws.Range("J:Q").FormatConditions.Delete
 ws.Range("J:Q").Value = ""
 
 'Reset of certain variables
-NumRows = 1 + ws.Range("A2", ws.Range("A2").End(xlDown)).Rows.Count
+NumRows = ws.Cells(Rows.Count, 1).End(xlUp).Row
 j = 2
 
 'Create Required Headers
