@@ -8,9 +8,6 @@ Dim j As Long
 Dim Opening As Double
 Dim Closing As Double
 
-Dim x As Long
-Dim y As Long
-
 'This is used to define the end point of the raw datasheet
 Dim NumRows As Long
 
@@ -22,7 +19,8 @@ For Each ws In Worksheets
 ws.Range("J:Q").FormatConditions.Delete
 ws.Range("J:Q").Value = ""
 
-'Reset of certain variables
+'Reset of certain variables for each new worksheet
+Opening = ws.Cells(2, 3).Value
 NumRows = ws.Cells(Rows.Count, 1).End(xlUp).Row
 j = 2
 
@@ -31,31 +29,20 @@ ws.Range("J1:M1").Value = Array("Ticker", "Yearly Change", "Percent Change", "To
 
 'Creating new ticker table. Counter i is used to search the Raw dataset row by row
 For i = 2 To NumRows
+'total volume calculation
+    ws.Cells(j, 13).Value = ws.Cells(j, 13).Value + ws.Cells(i, 7)
 
-'Using "if" to search for dates containing 0102 at the end, extracting Ticker Name and Opening value
-If Right(ws.Cells(i, 2).Value, 4) = "0102" Then
-ws.Cells(j, 10).Value = ws.Cells(i, 1).Value
-Opening = ws.Cells(i, 3).Value
-x = i
-End If
-
-'Using "If" to search for dates containing 1231 at the end, extracting Closing value
-If Right(ws.Cells(i, 2).Value, 4) = "1231" Then
-Closing = ws.Cells(i, 6).Value
-y = i
-
-'Calculations for Yearly Change and Percent Change
-ws.Cells(j, 11).Value = Closing - Opening
-ws.Cells(j, 12).Value = FormatPercent((Closing - Opening) / Opening, 2)
-
-'Calculations for Total Stock Volume
-For Z = x To y
-ws.Cells(j, 13).Value = ws.Cells(j, 13).Value + ws.Cells(Z, 7)
-Next Z
-
-'Increment J to move to next ticker
-j = j + 1
-End If
+'Using nextcells principle
+        If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1) Then
+'Ticker Name and Closing value
+            ws.Cells(j, 10).Value = ws.Cells(i, 1).Value
+            Closing = ws.Cells(i, 6).Value
+'Yearly Change and Percent Change
+            ws.Cells(j, 11).Value = Closing - Opening
+            ws.Cells(j, 12).Value = FormatPercent((Closing - Opening) / Opening, 2)
+            Opening = ws.Cells(i + 1, 3)
+            j = j + 1
+        End If
 
 Next i
 
@@ -89,3 +76,4 @@ ws.Columns("J:Q").AutoFit
 
 Next ws
 End Sub
+
