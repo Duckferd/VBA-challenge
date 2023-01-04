@@ -8,7 +8,9 @@ Simply copy the VBA script into your excel file and then run it.
 All three of the following are uploaded to GitHub/GitLab:
 
 Screenshots of the results (20xx_screenshot.jpg) - 3 of these
+
 Separate VBA script file
+
 README file (this!)
 
 Authors and Acknowledgement:
