@@ -10,12 +10,11 @@ All three of the following are uploaded to GitHub/GitLab:
 Screenshots of the results (20xx_screenshot.jpg) - 3 of these
 Separate VBA script file
 README file (this!)
-The excel file outputs were also included, just in case.
 
 Authors and Acknowledgement:
 Christopher Yang
 
-I would like to thank the University of Toronto for putting together a robust program for Data Analytics, and my fellow classmates as well as the wonderful teachers and LAs at the University of Toronto for their support.
+I would like to thank the University of Toronto for putting together a robust program for Data Analytics, and my fellow classmates as well as the wonderful Instructors and LAs at the University of Toronto for their support.
 
 License:
 This script is intended to be used for the purposes of assignment completion for a specific data analytics course. You may use this script freely if it fits your format. Please credit the author for the original work and do not plagiarize for the purposes of the assignment.
